@@ -45,7 +45,7 @@ clsx 是一个能够轻松切换类名的第三方库。常用于根据条件决
 
 #### 2.5 Image 组件
 
-Image 组件是next 实现的在 image 基础上封装的组件，具备响应式、懒加载、防止布局偏移等特性，可以从 next/image 中导入。
+Image 组件是 next 实现的在 image 基础上封装的组件，具备响应式、懒加载、防止布局偏移等特性，可以从 `next/image `中导入。
 
 #### 2.6 Adding the desktop hero image
 
@@ -74,3 +74,37 @@ Image 组件是next 实现的在 image 基础上封装的组件，具备响应�
    alt="Screenshots of the dashboard project showing mobile version"
 />
 ```
+
+#### 2.8 Recommend Reading
+
+* [Image Optimization Docs](https://nextjs.org/docs/app/building-your-application/optimizing/images)
+* [Font Optimization Docs](https://nextjs.org/docs/app/building-your-application/optimizing/fonts)
+* [Improving Web Performance with Images (MDN)](https://developer.mozilla.org/en-US/docs/Learn/Performance/Multimedia)
+* [Web Fonts (MDN)](https://developer.mozilla.org/en-US/docs/Learn/CSS/Styling_text/Web_fonts)
+* [How Core Web Vitals Affect SEO](https://vercel.com/blog/how-core-web-vitals-affect-seo)
+* [How Google handles JavaScript throughout the indexing process](https://vercel.com/blog/how-google-handles-javascript-throughout-the-indexing-process)
+
+### 3.Creating Layouts and Pages
+
+* 用文件系统路由创建 dashboard 路由
+* 了解创建新路由段是文件和文件夹的角色
+* 创建可在多个仪表板页面之间共享的嵌套路由
+* 了解什么是服务器托管、部分渲染和根布局
+
+#### 3.1 Nested routing
+
+Next.js 使用文件系统路由，其中每个文件夹代表一个路由段，对应着一个 URL 段，可以用来创建嵌套路由。
+
+#### 3.2 Creating the dashboard page
+
+* /app/dashboard/page.tsx 对应着 /dashboard 路径。
+* /app/dashboard/customers/page.tsx 对应着 /dashboard/customers
+* /app/dashboard/invoices/page.tsx 对应着 /dashboard/invoices
+
+#### 3.3 Creating the dashboard layout
+
+在 Next.js 中，使用特殊的文件 `layout.tsx` 来创建在多页面之间共享的 UI。Layout 组件接受一个 children 属性，这个 children 可以是页面也可以是其他的 Layout。
+
+使用 layout 的一个好处是，他只会进行局部渲染。也就是说：在导航时，只有页面组件会更新，而整体布局不会重新渲染。并且在页面之间转换时，局部渲染会在 layout 中保留客户端的 React 状态。
+
+---
