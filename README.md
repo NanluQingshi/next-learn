@@ -107,4 +107,28 @@ Next.js 使用文件系统路由，其中每个文件夹代表一个路由段，
 
 使用 layout 的一个好处是，他只会进行局部渲染。也就是说：在导航时，只有页面组件会更新，而整体布局不会重新渲染。并且在页面之间转换时，局部渲染会在 layout 中保留客户端的 React 状态。
 
----
+### 4.Navigating Between Pages
+
+* 如何使用 `next/link `组件
+* 如何用 hook `usePathname() `实现链接激活状态
+* Next.js 中 navigation 的工作原理
+
+#### 4.1 Why optimize navigation
+
+导航使用超链接：每次切换页面，都会进行整个页面的刷新。
+
+#### 4.2 The `<Link>` Component
+
+Link 组件实现和 a 标签类似的效果，使用也类似。Link 允许你用 JavaScript 实现客户端导航。位于 `next/link `下。使用 Link 组件后，网站不再像使用 a 标签那样，进行全部刷新，而是会进行局部刷新。
+
+#### 4.3 Automatic code-splitting and prefetching
+
+在传统的 React 单页面应用中，浏览器会在页面初始加载时就加载全部代码。与之不同，Next.js 会自动根据路由片段来分割代码，提高用户体验。
+
+根据路由片段来分割代码，意味着页面之间是隔离的。这个页面报错，其他的页面仍然能够正常运行。同时这也减少了浏览器的代码解析量，使得网站速度更快了。
+
+而且，在生产环境下，Next.js 会自动在后台预获取当前链接路由的代码，也就是说 在Link 组件出现在视口中时，它的代码早已经被加载好了，所以页面转换几乎发生在瞬间。
+
+#### 4.4 Pattern: Showing active links
+
+使用 React hook `usePathname() `来进行导航栏中当前路由的高亮。`usePathname()` 是 React hook，因此需要在文件顶部添加指令 `'use client'`，然后导入该 hook。
